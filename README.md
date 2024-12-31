@@ -1,5 +1,8 @@
 # Detect Drowsiness
+
+
 A machine learning project to detect drowsiness in real-time using a webcam.
+
 This project is designed to detect drowsiness in drivers using a webcam. It leverages computer vision and machine learning techniques to identify signs of fatigue, ensuring safety on the road. Currently, we are doing it on the webserver, soon we can do it on the car for safety system.
 ------------------------------------
 ## Installation
@@ -17,6 +20,8 @@ Usage
    python main.py
 2. Click local host
 3. Turn on camera.
+---
+
 ---
 # Credit:
 * Dang Minh Kha - 21139025
