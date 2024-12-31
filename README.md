@@ -15,13 +15,11 @@ Clone the repository:
 
 ---
 Usage
-
+Please change the path accordingly
 1. Run the main script:
-   python main.py
+   python app.py
 2. Click local host
 3. Turn on camera.
----
-
 ---
 # Credit:
 * Dang Minh Kha - 21139025
