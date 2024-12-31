@@ -14,7 +14,8 @@ Clone the repository:
 4. download model at :https://drive.google.com/drive/folders/1DFgra2oo2PsKlgTqB_OX25jA98SH9J6b?hl=vi
 
 ---
-Usage
+# Usage
+
 Please change the path accordingly
 1. Run the main script:
    python app.py
