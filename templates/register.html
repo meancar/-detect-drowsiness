@@ -1,0 +1,155 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Drowsiness Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+      body {
+        display: flex;
+        justify-content: center; /* Canh giữa trang */
+        align-items: flex-start; /* Canh trên cùng */
+        height: 100vh; /* Chiều cao cửa sổ trình duyệt */
+        margin: 0;
+        flex-direction: column; /* Chia layout theo chiều dọc */
+      }
+
+      .logo {
+        width: 300px; 
+        height: 100px; 
+        margin-bottom: 0px;
+        margin-left: 40px;
+        margin-top: 30px;
+      }
+
+      #name {
+        padding: 10px;
+        margin-bottom: 10px;
+        width: 200px;
+      }
+
+      #video-container {
+        position: relative;
+      }
+
+      #video {
+        width: 640px; 
+        height: 480px; 
+        border: 1px solid #ccc;
+        margin-left: 700px;
+        margin-top: -200px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        margin-left: 280px;
+        margin-top: 60px;
+      }
+
+      input[type="submit"] {
+        background-color: #28a745;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #218838;
+      }
+
+      h1 {
+        margin-bottom: 30px;
+        margin-left: 200px; /* Đẩy tiêu đề sang bên phải */
+      }
+
+      #add-person-button {
+        margin-top: 20px;
+        margin-left: 850px; /* Move button to the left */
+      }
+
+      #name-container {
+        margin-left: auto; 
+        margin-right: 100px; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="logo">
+        <img id="img" src="/static/images/logo.png" alt="University Logo" style="width: 100%; height: auto;">
+      </div>
+
+      <h1>Information Register</h1>
+    </div>
+
+    <div class="content">
+      <form id="addPersonForm">
+        <div id="name-container" style="position: relative; top: 30px;left: 200px;">
+          <label for="name" style="font-weight: bold;">Name:</label> 
+          <input type="text" id="name" name="name" required placeholder="Enter your name"><br>
+        </div>
+        <!-- Mở Camera -->
+        <button type="button" onclick="startCamera()" >Capture Face</button><br>
+        <div id="video-container">
+          <video id="video" autoplay></video><br>
+        </div>
+        <!-- Chụp ảnh -->
+        <button type="button" id="add-person-button" onclick="captureImage()">Add Person</button>
+      </form>
+
+      <canvas id="canvas" width="320" height="240" style="display: none;"></canvas>
+    </div>
+    <!-- Chuyển về Trang chủ -->
+    <a href="http://127.0.0.1:5000" style="position: absolute; top: 327px; left: 1100px; margin-top: 380px; padding: 10px 40px; background-color: black;
+      color: white; border: none; border-radius: 5px; text-decoration: none;">Back</a>
+    <script>
+      var video = document.getElementById('video');
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+
+      function startCamera() {
+        var constraints = { video: true };
+
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(function(stream) {
+            video.srcObject = stream;
+          })
+          .catch(function(err) {
+            console.error('Error accessing camera:', err);
+          });
+      }
+
+      function captureImage() {
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        var imageData = canvas.toDataURL('image/jpeg');
+
+        var name = document.getElementById('name').value;
+
+        fetch('/add_person', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name: name, image_data: imageData })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error adding person');
+          }
+          return response.json();
+        })
+        .then(data => {
+          alert(data.message);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          alert('Error adding person');
+        });
+      }
+    </script>
+  </body>
+  </html>
