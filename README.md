@@ -5,10 +5,10 @@ This project is designed to detect drowsiness in drivers using a webcam. It leve
 ## Installation
 
 Clone the repository:
-   git clone https://github.com/meancar/detect-drowsiness.git
-   cd detect-drowsiness
-   pip install -r requirements.txt
-   download model at :https://drive.google.com/drive/folders/1DFgra2oo2PsKlgTqB_OX25jA98SH9J6b?hl=vi
+1. git clone https://github.com/meancar/detect-drowsiness.git
+2. cd detect-drowsiness
+3. pip install -r requirements.txt
+4. download model at :https://drive.google.com/drive/folders/1DFgra2oo2PsKlgTqB_OX25jA98SH9J6b?hl=vi
 
 ---
 Usage
