@@ -19,5 +19,5 @@ Usage
 3. Turn on camera.
 ---
 # Credit:
-*Dang Minh Kha - 21139025
-*Bui Kha Lin - 21139030
+* Dang Minh Kha - 21139025
+* Bui Kha Lin - 21139030
