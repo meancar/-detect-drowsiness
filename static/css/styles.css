@@ -1,0 +1,12 @@
+/* Select the h1 element inside the header element */
+
+.header h1 {
+    /* Change the font family to Arial */
+    font-family: Arial;
+    /* Change the font size to 36 pixels */
+    font-size: 36px;
+    /* Change the font color to black */
+    color: black;
+    /* Align the text to the left */
+    text-align: left;
+}
